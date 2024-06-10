@@ -1,7 +1,6 @@
-import { QueryParams } from "@/types";
-import { QueryFunctionContext, QueryKey } from "@tanstack/react-query";
 import axios from "axios";
 
+//@ts-expect-error Couldn't find the proper types
 export const fetchResults = async ({ queryKey, pageParam }) => {
   const [_key, { itemCount, keywords }] = queryKey;
 
