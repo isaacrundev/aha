@@ -48,6 +48,7 @@ export default function SliderSet({
             className={classNames(
               "font-medium leading-6 flex absolute",
               { "text-white/50": idx !== sliderValueNum },
+              { "left-[1.4%]": idx === 0 && !isDesktop },
               { "left-[18.7%]": idx === 1 && !isDesktop },
               { "left-[35.8%]": idx === 2 && !isDesktop },
               { "left-[51.5%]": idx === 3 && !isDesktop },
