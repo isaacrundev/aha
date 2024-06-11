@@ -5,9 +5,10 @@ import { useEffect } from "react";
 import { TagItem } from "../TagItem";
 import { fetchTags } from "@/api/api";
 import { Tag } from "@/types";
+import LoadingTagItem from "../LoadingTagItem";
 
 export function DesktopTags() {
-  const { data: tagsData } = useQuery({
+  const { data, isLoading } = useQuery({
     queryKey: ["tags"],
     queryFn: fetchTags,
   });
@@ -19,9 +20,24 @@ export function DesktopTags() {
           <div className="mt-[85px] ml-[254px] mr-60">
             <p className="text-3xl">Tags</p>
             <div className="grid grid-cols-5 my-1">
-              {tagsData?.map((tag: Tag) => (
-                <TagItem key={tag.id} tagCount={tag.count} tagName={tag.name} />
-              ))}
+              {isLoading ? (
+                <>
+                  <LoadingTagItem /> <LoadingTagItem />
+                  <LoadingTagItem />
+                  <LoadingTagItem />
+                  <LoadingTagItem /> <LoadingTagItem />
+                  <LoadingTagItem /> <LoadingTagItem />
+                  <LoadingTagItem /> <LoadingTagItem />
+                </>
+              ) : (
+                data?.map((tag: Tag) => (
+                  <TagItem
+                    key={tag.id}
+                    tagCount={tag.count}
+                    tagName={tag.name}
+                  />
+                ))
+              )}
             </div>
           </div>
         </main>

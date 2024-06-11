@@ -3,6 +3,7 @@ import classNames from "classnames";
 import FriendItem from "../FriendItem";
 import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
+import LoadingFriendItem from "../LoadingFriendItem";
 
 type FollowerItem = {
   id: string;
@@ -28,7 +29,7 @@ const fetchFollowing = async () => {
 
 export default function Friends() {
   const [isFollowersTabActive, setIsFollowersTabActive] = useState(true);
-  const { data: followersData } = useQuery({
+  const { data: followersData, isLoading } = useQuery({
     queryKey: ["followers"],
     queryFn: fetchFollowers,
   });
@@ -40,11 +41,6 @@ export default function Friends() {
   const handleclick = () => {
     setIsFollowersTabActive(!isFollowersTabActive);
   };
-
-  // useEffect(() => {
-  //   console.log(followersData);
-  //   console.log(followingData);
-  // }, [followersData, followingData]);
 
   return (
     <>
@@ -72,8 +68,17 @@ export default function Friends() {
           </button>
         </div>
         <div className="flex flex-col gap-4 px-4 pt-9">
-          {isFollowersTabActive
-            ? followersData?.map((i: FollowerItem) => (
+          {isFollowersTabActive ? (
+            isLoading ? (
+              <>
+                <LoadingFriendItem />
+                <LoadingFriendItem />
+                <LoadingFriendItem />
+                <LoadingFriendItem />
+                <LoadingFriendItem />
+              </>
+            ) : (
+              followersData?.map((i: FollowerItem) => (
                 <FriendItem
                   key={i.id}
                   avatar={i.avatar}
@@ -82,15 +87,26 @@ export default function Friends() {
                   username={i.username}
                 />
               ))
-            : followingData?.map((i: FollowerItem) => (
-                <FriendItem
-                  key={i.id}
-                  avatar={i.avatar}
-                  isFollowing={i.isFollowing}
-                  name={i.name}
-                  username={i.username}
-                />
-              ))}
+            )
+          ) : isLoading ? (
+            <>
+              <LoadingFriendItem />
+              <LoadingFriendItem />
+              <LoadingFriendItem />
+              <LoadingFriendItem />
+              <LoadingFriendItem />
+            </>
+          ) : (
+            followingData?.map((i: FollowerItem) => (
+              <FriendItem
+                key={i.id}
+                avatar={i.avatar}
+                isFollowing={i.isFollowing}
+                name={i.name}
+                username={i.username}
+              />
+            ))
+          )}
         </div>
       </div>
     </>
