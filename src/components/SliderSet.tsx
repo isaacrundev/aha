@@ -39,7 +39,7 @@ export default function SliderSet({
         value={sliderValueNum >= 5 ? [maxSliderValue] : sliderValue}
         max={maxSliderValue}
         onValueChange={handleSliderChange}
-        className="pl-0.5"
+        className=""
       />
       <div className="pl-0.5 py-4 relative w-full">
         {itemCountValues.map((_, idx) => (
@@ -48,14 +48,15 @@ export default function SliderSet({
             className={classNames(
               "font-medium leading-6 flex absolute",
               { "text-white/50": idx !== sliderValueNum },
-              { "left-[18.5%]": idx === 1 && !isDesktop },
-              { "left-[35.5%]": idx === 2 && !isDesktop },
+              { "left-[18.7%]": idx === 1 && !isDesktop },
+              { "left-[35.8%]": idx === 2 && !isDesktop },
               { "left-[51.5%]": idx === 3 && !isDesktop },
               { "left-[68.5%]": idx === 4 && !isDesktop },
-              { "left-[19%]": idx === 1 && isDesktop },
+              { "left-[0.5%]": idx === 0 && isDesktop },
+              { "left-[19.1%]": idx === 1 && isDesktop },
               { "left-[37.3%]": idx === 2 && isDesktop },
-              { "left-[55%]": idx === 3 && isDesktop },
-              { "left-[73.2%]": idx === 4 && isDesktop },
+              { "left-[54.8%]": idx === 3 && isDesktop },
+              { "left-[72.9%]": idx === 4 && isDesktop },
               { "right-0": idx === 5 }
             )}
           >
